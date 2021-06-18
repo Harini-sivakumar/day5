@@ -14,6 +14,7 @@ export class ReactiveComponent implements OnInit {
 student!: FormGroup;
 submitted=false
 
+
 constructor(private formbuilder:FormBuilder) { }
 get f() { return this.student.controls; }
   ngOnInit(): void {
@@ -22,7 +23,11 @@ get f() { return this.student.controls; }
       
       LASTNAME:[null,Validators.required],
       AGE:[null,Validators.required],
-      GENDER:[null,Validators.requiredTrue]
+      GENDER:[null,Validators.required],
+      DATEOFBIRTH:[null,Validators.required],
+      EMAIL:[null,Validators.email],
+      CURRENTADDRESS:[null,Validators.required],
+      PERMANENTADDRESS:[null,Validators.required]
     })
   
   
@@ -33,6 +38,10 @@ get f() { return this.student.controls; }
     if(this.student.invalid){
       return;
     }
-  }
+    this.student.controls.CURRENTADDRESS=this.student.controls.PERMANENTADDRESS;
 
+    console.log(this.student.controls.PERMANENTADDRESS.value);
+
+  }
+ 
 }

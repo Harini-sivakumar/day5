@@ -50,14 +50,14 @@
             <td>
                 GENDER * :
             </td>
-            <td     class="form-group" [ngClass]="{'is-invalid' :submitted && f.GENDER.errors}" >
-            <input type="radio"   name="GENDER" [ngClass]="{'is-invalid' :submitted && f.GENDER.errors}"> -->  MALE
+            <td     class="form-check"  >
+            <input type="radio" formControlName="GENDER" value="male" id="male" name="GENDER" [ngClass]="{'is-invalid' :submitted && f.GENDER.errors}"> -->  MALE
             <br>
-            <input type="radio"  name="GENDER" [ngClass]="{'is-invalid' :submitted && f.GENDER.errors}"> -->  FEMALE
+            <input type="radio" formControlName="GENDER" value="female" id="female" name="GENDER" [ngClass]="{'is-invalid' :submitted && f.GENDER.errors}"> -->  FEMALE
             <br>
-            <input type="radio"  name="GENDER" [ngClass]="{'is-invalid' :submitted && f.GENDER.errors}"> -->  OTHERS
-            <div *ngIf="submitted && f.GENDER.errors" class="invalid-feedback">
-                <div *ngIf="f.GENDER.errors.requiredTrue">Gender is required</div>
+            <input type="radio" formControlName="GENDER"  value="others" id="others" name="GENDER" [ngClass]="{'is-invalid' :submitted && f.GENDER.errors}"> -->  OTHERS
+            <div *ngIf="f.GENDER.errors && f.GENDER.invalid" class="invalid-feedback">
+                <div *ngIf="f.GENDER.errors?.required">Gender is required</div>
               </div>
             </td>
         </tr>
@@ -68,8 +68,11 @@
                 DATE OF BIRTH * :
             </td>
             <td>
-            <input type="date"  class="form-control"/>
-            </td>
+            <input type="date"  class="form-control"  formControlName="DATEOFBIRTH" [ngClass]="{'is-invalid' :submitted && f.DATEOFBIRTH.errors}"/>
+            <div *ngIf="submitted && f.DATEOFBIRTH.errors" class="invalid-feedback">
+                <div *ngIf="f.DATEOFBIRTH.errors.required">Age is required</div>
+              </div>       
+        </td>
         </tr>
         <br>
 
@@ -78,7 +81,10 @@
                 E-MAIL * :
             </td>
             <td>
-            <input type="email" class="form-control" />
+            <input type="email" class="form-control" ormControlName="EMAIL" [ngClass]="{'is-invalid' :submitted && f.EMAIL.errors}"/>
+            <div *ngIf="submitted && f.EMAIL.errors" class="invalid-feedback">
+                <div *ngIf="f.EMAIL.errors.required">Email is required</div>
+              </div>       
             </td>
         </tr>
         <br>
@@ -87,7 +93,7 @@
                 CURRENT ADDRESS * :
             </td>
             <td>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" formControlName="CURRENTADDRESS"  />
             </td>
         </tr>
         <br>
@@ -105,7 +111,7 @@
                 PERMANENT ADDRESS * :
             </td>
             <td>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" formControlName="PERMANENTADDRESS" />
             </td>
         </tr>
         <br>
