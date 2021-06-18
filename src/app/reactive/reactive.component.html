@@ -1,0 +1,210 @@
+
+
+<form [formGroup]="student">
+    <table align="center" border="10px" >
+        <tr>
+            <td >
+                FIRST NAME * :
+               
+            </td>
+            
+            <td>
+            <input type="text" formControlName="FIRSTNAME" class="form-control"   required minlength="4" [ngClass]="{'is-invalid' :submitted && f.FIRSTNAME.errors}"/>
+            <div *ngIf="submitted && f.FIRSTNAME.errors" class="invalid-feedback">
+                <div *ngIf="f.FIRSTNAME.errors.required">First Name is required</div>
+               <div *ngIf="f.FIRSTNAME.errors?.minlength">First Name must be more than 3 letters</div>
+              </div>
+            
+            </td>
+            
+        </tr>
+        <br>
+
+        <tr>
+            <td>
+                LAST NAME * :
+            </td>
+            <td>
+            <input type="text" formControlName="LASTNAME" class="form-control" [ngClass]="{'is-invalid' :submitted && f.LASTNAME.errors}"/>
+            <div *ngIf="submitted && f.LASTNAME.errors" class="invalid-feedback">
+                <div *ngIf="f.LASTNAME.errors.required">Last Name is required</div>
+              </div>   
+        </td>
+        </tr>
+        <br>
+
+        <tr>
+            <td>
+                AGE * :
+            </td>
+            <td>
+            <input type="number" class="form-control" formControlName="AGE" [ngClass]="{'is-invalid' :submitted && f.AGE.errors}"/>
+            <div *ngIf="submitted && f.AGE.errors" class="invalid-feedback">
+                <div *ngIf="f.AGE.errors.required">Age is required</div>
+              </div>   
+            </td>
+        </tr>
+        <br>
+
+        <tr>
+            <td>
+                GENDER * :
+            </td>
+            <td     class="form-group" [ngClass]="{'is-invalid' :submitted && f.GENDER.errors}" >
+            <input type="radio"   name="GENDER" [ngClass]="{'is-invalid' :submitted && f.GENDER.errors}"> -->  MALE
+            <br>
+            <input type="radio"  name="GENDER" [ngClass]="{'is-invalid' :submitted && f.GENDER.errors}"> -->  FEMALE
+            <br>
+            <input type="radio"  name="GENDER" [ngClass]="{'is-invalid' :submitted && f.GENDER.errors}"> -->  OTHERS
+            <div *ngIf="submitted && f.GENDER.errors" class="invalid-feedback">
+                <div *ngIf="f.GENDER.errors.requiredTrue">Gender is required</div>
+              </div>
+            </td>
+        </tr>
+        <br>
+
+        <tr>
+            <td>
+                DATE OF BIRTH * :
+            </td>
+            <td>
+            <input type="date"  class="form-control"/>
+            </td>
+        </tr>
+        <br>
+
+        <tr>
+            <td>
+                E-MAIL * :
+            </td>
+            <td>
+            <input type="email" class="form-control" />
+            </td>
+        </tr>
+        <br>
+        <tr>
+            <td>
+                CURRENT ADDRESS * :
+            </td>
+            <td>
+            <input type="text" class="form-control" />
+            </td>
+        </tr>
+        <br>
+        <tr>
+            <td>
+                Is your current address and permanent address same ? :
+            </td>
+            <td>
+            <input type="checkbox"class="form-control"  >CLICK HERE
+            </td>
+        </tr>
+        <br>
+        <tr>
+            <td>
+                PERMANENT ADDRESS * :
+            </td>
+            <td>
+            <input type="text" class="form-control" />
+            </td>
+        </tr>
+        <br>
+        
+
+        <tr>
+            <td>
+                HSLC SCHOOL NAME * :
+            </td>
+            <td>
+            <input type="text" class="form-control" />
+            </td>
+        </tr>
+        <br>
+
+        <tr>
+            <td>
+                HSLC MODE * :
+            </td>
+            <td>
+            <select class="custom-select">
+                <option>----------------</option>
+                <option>CBSE</option>
+                <option>STATE BOARD</option>
+                <option>MATRIC</option>
+            </select>
+            </td>
+        </tr>
+        <br>
+
+        <tr>
+            <td>
+                HSLC MARK * :
+            </td>
+            <td>
+            <input type="number" class="form-control"  />
+            </td>
+        </tr>
+        <br>
+
+        <tr>
+            <td>
+                HSLC PERCENT * :
+            </td>
+            <td>
+            <input type="number" class="form-control" />
+            </td>
+        </tr>
+        <br>
+
+        <tr>
+            <td>
+                SSLC SCHOOL NAME * :
+            </td>
+            <td>
+            <input type="text" class="form-control" />
+            </td>
+        </tr>
+        <br>
+
+        <tr>
+            <td>
+                SSLC MODE * :
+            </td>
+            <td>
+                <select class="custom-select">
+                    <option>----------------</option>
+                    <option>CBSE</option>
+                    <option>STATE BOARD</option>
+                    <option>MATRIC</option>
+                </select>
+            </td>
+        </tr>
+        <br>
+
+        <tr>
+            <td>
+                SSLC MARK * :
+            </td>
+            <td>
+            <input type="number" class="form-control" />
+            </td>
+        </tr>
+        <br>
+
+        <tr>
+            <td>
+                SSLC PERCENT * :
+            </td>
+            <td>
+            <input type="number" class="form-control" />
+            </td>
+        </tr>
+        <br>
+
+        <tr>
+            <td>
+                <button type="Submit" value="submit" (click)="onSubmit()">SUBMIT</button>
+            </td>
+        </tr>
+    </table>
+</form>
