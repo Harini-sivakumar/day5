@@ -1,7 +1,10 @@
 
 
 <form [formGroup]="student">
+    
     <table align="center" border="10px" >
+        <P align="center"> <u>REACTIVE FORM </u></P>
+
         <tr>
             <td >
                 FIRST NAME * :
@@ -11,8 +14,8 @@
             <td>
             <input type="text" formControlName="FIRSTNAME" class="form-control"   required minlength="4" [ngClass]="{'is-invalid' :submitted && f.FIRSTNAME.errors}"/>
             <div *ngIf="submitted && f.FIRSTNAME.errors" class="invalid-feedback">
-                <div *ngIf="f.FIRSTNAME.errors.required">First Name is required</div>
-               <div *ngIf="f.FIRSTNAME.errors?.minlength">First Name must be more than 3 letters</div>
+                <div *ngIf="f.FIRSTNAME.errors.required">* First Name is required *</div>
+               <div *ngIf="f.FIRSTNAME.errors?.minlength">* First Name must be more than 3 letters *</div>
               </div>
             
             </td>
@@ -27,7 +30,7 @@
             <td>
             <input type="text" formControlName="LASTNAME" class="form-control" [ngClass]="{'is-invalid' :submitted && f.LASTNAME.errors}"/>
             <div *ngIf="submitted && f.LASTNAME.errors" class="invalid-feedback">
-                <div *ngIf="f.LASTNAME.errors.required">Last Name is required</div>
+                <div *ngIf="f.LASTNAME.errors.required">* Last Name is required *</div>
               </div>   
         </td>
         </tr>
@@ -40,7 +43,7 @@
             <td>
             <input type="number" class="form-control" formControlName="AGE" [ngClass]="{'is-invalid' :submitted && f.AGE.errors}"/>
             <div *ngIf="submitted && f.AGE.errors" class="invalid-feedback">
-                <div *ngIf="f.AGE.errors.required">Age is required</div>
+                <div *ngIf="f.AGE.errors.required">* Age is required *</div>
               </div>   
             </td>
         </tr>
@@ -51,13 +54,13 @@
                 GENDER * :
             </td>
             <td     class="form-check"  >
-            <input type="radio" formControlName="GENDER" value="male" id="male" name="GENDER" [ngClass]="{'is-invalid' :submitted && f.GENDER.errors}"> -->  MALE
+            <input type="radio" formControlName="GENDER" value="male" id="male" name="GENDER" [ngClass]="{'is-invalid' :submitted && f.GENDER.errors}">   MALE
             <br>
-            <input type="radio" formControlName="GENDER" value="female" id="female" name="GENDER" [ngClass]="{'is-invalid' :submitted && f.GENDER.errors}"> -->  FEMALE
+            <input type="radio" formControlName="GENDER" value="female" id="female" name="GENDER" [ngClass]="{'is-invalid' :submitted && f.GENDER.errors}">   FEMALE
             <br>
-            <input type="radio" formControlName="GENDER"  value="others" id="others" name="GENDER" [ngClass]="{'is-invalid' :submitted && f.GENDER.errors}"> -->  OTHERS
+            <input type="radio" formControlName="GENDER"  value="others" id="others" name="GENDER" [ngClass]="{'is-invalid' :submitted && f.GENDER.errors}">   OTHERS
             <div *ngIf="f.GENDER.errors && f.GENDER.invalid" class="invalid-feedback">
-                <div *ngIf="f.GENDER.errors?.required">Gender is required</div>
+                <div *ngIf="f.GENDER.errors?.required">* Gender is required *</div>
               </div>
             </td>
         </tr>
@@ -70,7 +73,7 @@
             <td>
             <input type="date"  class="form-control"  formControlName="DATEOFBIRTH" [ngClass]="{'is-invalid' :submitted && f.DATEOFBIRTH.errors}"/>
             <div *ngIf="submitted && f.DATEOFBIRTH.errors" class="invalid-feedback">
-                <div *ngIf="f.DATEOFBIRTH.errors.required">Age is required</div>
+                <div *ngIf="f.DATEOFBIRTH.errors.required">* Date of Birth is required *</div>
               </div>       
         </td>
         </tr>
@@ -81,9 +84,9 @@
                 E-MAIL * :
             </td>
             <td>
-            <input type="email" class="form-control" ormControlName="EMAIL" [ngClass]="{'is-invalid' :submitted && f.EMAIL.errors}"/>
+            <input type="email" class="form-control" formControlName="EMAIL" [ngClass]="{'is-invalid' :submitted && f.EMAIL.errors}"/>
             <div *ngIf="submitted && f.EMAIL.errors" class="invalid-feedback">
-                <div *ngIf="f.EMAIL.errors.required">Email is required</div>
+                <div *ngIf="f.EMAIL.errors.email">* Email is required *</div>
               </div>       
             </td>
         </tr>
@@ -93,7 +96,10 @@
                 CURRENT ADDRESS * :
             </td>
             <td>
-            <input type="text" class="form-control" formControlName="CURRENTADDRESS"  />
+            <input type="text" class="form-control" formControlName="CURRENTADDRESS" [ngClass]="{'is-invalid' :submitted && f.CURRENTADDRESS.errors}" [(ngModel)]="caddress"/>
+            <div *ngIf="submitted && f.CURRENTADDRESS.errors" class="invalid-feedback">
+                <div *ngIf="f.CURRENTADDRESS.errors.required">* CURRENTADDRESS is required *</div>
+              </div>        
             </td>
         </tr>
         <br>
@@ -102,7 +108,7 @@
                 Is your current address and permanent address same ? :
             </td>
             <td>
-            <input type="checkbox"class="form-control"  >CLICK HERE
+            <input type="checkbox"class="custom-select" (change)="Address()">CLICK HERE
             </td>
         </tr>
         <br>
@@ -111,7 +117,7 @@
                 PERMANENT ADDRESS * :
             </td>
             <td>
-            <input type="text" class="form-control" formControlName="PERMANENTADDRESS" />
+            <input type="text" class="form-control" formControlName="PERMANENTADDRESS" value={{paddress}}/>
             </td>
         </tr>
         <br>
@@ -122,24 +128,30 @@
                 HSLC SCHOOL NAME * :
             </td>
             <td>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" formControlName="HSLCSCHOOLNAME" [ngClass]="{'is-invalid' :submitted && f.HSLCSCHOOLNAME.errors}"/>
+            <div *ngIf="submitted && f.HSLCSCHOOLNAME.errors" class="invalid-feedback">
+                <div *ngIf="f.HSLCSCHOOLNAME.errors.required">* HSLC school name is required *</div>
+              </div>  
             </td>
         </tr>
         <br>
 
         <tr>
             <td>
-                HSLC MODE * :
+                HSLC MODE *  :
             </td>
-            <td>
-            <select class="custom-select">
-                <option>----------------</option>
-                <option>CBSE</option>
-                <option>STATE BOARD</option>
-                <option>MATRIC</option>
-            </select>
+            <td     class="form-check"  >
+            <input type="radio" formControlName="HSLCMODE" value="cbse" id="cbse" name="HSLCMODE" [ngClass]="{'is-invalid' :submitted && f.HSLCMODE.errors}"  >   CBSE
+            <br>
+            <input type="radio" formControlName="HSLCMODE" value="stateboard" id="stateboard" name="HSLCMODE" [ngClass]="{'is-invalid' :submitted && f.HSLCMODE.errors}">   STATE BOARD
+            <br>
+            <input type="radio" formControlName="HSLCMODE" value="matric" id="matric" name="HSLCMODE" [ngClass]="{'is-invalid' :submitted && f.HSLCMODE.errors}">   MATRIC
+            <div *ngIf="f.HSLCMODE.errors && f.HSLCMODE.invalid" class="invalid-feedback">
+                <div *ngIf="f.HSLCMODE.errors?.required">* HSLC mode is required *</div>
+              </div>
             </td>
         </tr>
+    
         <br>
 
         <tr>
@@ -147,7 +159,11 @@
                 HSLC MARK * :
             </td>
             <td>
-            <input type="number" class="form-control"  />
+            <input  type="number" class="form-control" formControlName="HSLCMARK" [ngClass]="{'is-invalid' :submitted && f.HSLCMARK.errors}"  [(ngModel)]="hmarks" (change)="hresult()" >
+            <div *ngIf="submitted && f.HSLCMARK.errors" class="invalid-feedback">
+                <div *ngIf="f.HSLCMARK.errors.required">HSLC Mark is required</div>
+              
+              </div>   
             </td>
         </tr>
         <br>
@@ -157,34 +173,41 @@
                 HSLC PERCENT * :
             </td>
             <td>
-            <input type="number" class="form-control" />
+            <input type="number" class="form-control" formControlName="HSLCPERCENT" value="{{hpercent}}"/>
             </td>
         </tr>
         <br>
 
+        
         <tr>
             <td>
                 SSLC SCHOOL NAME * :
             </td>
             <td>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" formControlName="SSLCSCHOOLNAME" [ngClass]="{'is-invalid' :submitted && f.SSLCSCHOOLNAME.errors}"/>
+            <div *ngIf="submitted && f.SSLCSCHOOLNAME.errors" class="invalid-feedback">
+                <div *ngIf="f.SSLCSCHOOLNAME.errors.required">* SSLC school name is required *</div>
+              </div>  
             </td>
         </tr>
         <br>
 
         <tr>
             <td>
-                SSLC MODE * :
+                SSLC MODE *  :
             </td>
-            <td>
-                <select class="custom-select">
-                    <option>----------------</option>
-                    <option>CBSE</option>
-                    <option>STATE BOARD</option>
-                    <option>MATRIC</option>
-                </select>
+            <td     class="form-check"  >
+            <input type="radio" formControlName="SSLCMODE" value="cbse" id="cbse" name="SSLCMODE" [ngClass]="{'is-invalid' :submitted && f.SSLCMODE.errors}">   CBSE
+            <br>
+            <input type="radio" formControlName="SSLCMODE" value="stateboard" id="stateboard" name="SSLCMODE" [ngClass]="{'is-invalid' :submitted && f.SSLCMODE.errors}">   STATE BOARD
+            <br>
+            <input type="radio" formControlName="SSLCMODE" value="matric" id="matric" name="SSLCMODE" [ngClass]="{'is-invalid' :submitted && f.SSLCMODE.errors}">   MATRIC
+            <div *ngIf="f.SSLCMODE.errors && f.SSLCMODE.invalid" class="invalid-feedback">
+                <div *ngIf="f.SSLCMODE.errors?.required">* SSLC mode is required *</div>
+              </div>
             </td>
         </tr>
+        
         <br>
 
         <tr>
@@ -192,7 +215,10 @@
                 SSLC MARK * :
             </td>
             <td>
-            <input type="number" class="form-control" />
+            <input  type="number" class="form-control" formControlName="SSLCMARK" [ngClass]="{'is-invalid' :submitted && f.SSLCMARK.errors}"/>
+            <div *ngIf="submitted && f.SSLCMARK.errors" class="invalid-feedback">
+                <div *ngIf="f.SSLCMARK.errors.required">* SSLC Mark is required *</div>
+              </div>   
             </td>
         </tr>
         <br>
@@ -206,7 +232,7 @@
             </td>
         </tr>
         <br>
-
+    
         <tr>
             <td>
                 <button type="Submit" value="submit" (click)="onSubmit()">SUBMIT</button>

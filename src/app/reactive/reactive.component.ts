@@ -14,6 +14,11 @@ export class ReactiveComponent implements OnInit {
 student!: FormGroup;
 submitted=false
 
+paddress:any;
+caddress:any;
+hmarks!:number;
+hpercent!:number;
+
 
 constructor(private formbuilder:FormBuilder) { }
 get f() { return this.student.controls; }
@@ -25,23 +30,51 @@ get f() { return this.student.controls; }
       AGE:[null,Validators.required],
       GENDER:[null,Validators.required],
       DATEOFBIRTH:[null,Validators.required],
-      EMAIL:[null,Validators.email],
+      EMAIL:[' ',Validators.email],
       CURRENTADDRESS:[null,Validators.required],
-      PERMANENTADDRESS:[null,Validators.required]
+      PERMANENTADDRESS:[null,Validators.required],
+      HSLCSCHOOLNAME:[null,Validators.required],
+      HSLCMODE:[null,Validators.required],
+      HSLCMARK:['',Validators.required],
+      HSLCPERCENT:[null],
+      SSLCSCHOOLNAME:[null,Validators.required],
+      SSLCMODE:[null,Validators.required],
+      SSLCMARK:[null,Validators.required]
     })
   
   
   }
-  onSubmit(){
-    this.submitted=true;
+ 
+Address(){
+  if(this.caddress){
+    this.paddress=this.caddress;
+    console.log(this.paddress);
+  }
+  
 
-    if(this.student.invalid){
-      return;
-    }
-    this.student.controls.CURRENTADDRESS=this.student.controls.PERMANENTADDRESS;
+}
+hresult(){
+  if(this.hmarks<=1200){
+    this.hpercent=(((this.hmarks)/1200)*100);
+    console.log(this.hpercent);
+  }else{
+    this.hpercent=0;
+  }
+}
+onSubmit(){
+  this.submitted=true;
 
-    console.log(this.student.controls.PERMANENTADDRESS.value);
+  if(this.student.invalid){
+    return;
 
   }
+ 
+
+  console.log(this.student.value);
+
+   console.log(this.student.controls.PERCENT.value);
+ 
+
+}
  
 }
