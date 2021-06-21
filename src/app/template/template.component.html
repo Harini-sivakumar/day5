@@ -1,89 +1,127 @@
 
 
-<form>
+<form name="student" (ngSubmit)="f.form.valid && onSubmit()" #f=ngForm>
+    
     <table align="center" border="10px" >
+        <P align="center"> <u>REACTIVE FORM </u></P>
+
         <tr>
             <td >
                 FIRST NAME * :
                
             </td>
+            
             <td>
-            <input type="text">
-        
+            <input type="text" [(ngModel)]="model.FIRSTNAME" #FIRSTNAME="ngModel" name="FIRSTNAME" class="form-control"   required minlength="4" [ngClass]="{'is-invalid' :f.submitted && FIRSTNAME.invalid}"/>
+            <div *ngIf="f.submitted && FIRSTNAME.invalid" class="invalid-feedback">
+                <div *ngIf="FIRSTNAME.errors?.required">* First Name is required *</div>
+               <div *ngIf="FIRSTNAME.errors?.minlength">* First Name must be more than 3 letters *</div>
+              </div>
+            
             </td>
             
         </tr>
         <br>
-
         <tr>
-            <td>
-                LAST NAME * :
-            </td>
-            <td>
-            <input type="text" >
-        </td>
-        </tr>
-        <br>
-
-        <tr>
-            <td>
-                AGE * :
-            </td>
-            <td>
-            <input type="number" >
-            </td>
-        </tr>
-        <br>
-
-        <tr>
-            <td>
-                GENDER * :
-            </td>
             <td >
-            <input type="radio"  value="male"> -->  MALE
-            <br>
-            <input type="radio"  value="female"> -->  FEMALE
-            <br>
-            <input type="radio"   value="others"> -->  OTHERS
+                LAST NAME * :
+               
+            </td>
+            
+            <td>
+            <input type="text" [(ngModel)]="model.LASTNAME" #LASTNAME="ngModel" name="LASTNAME" class="form-control" required minlength="1"  [ngClass]="{'is-invalid' :f.submitted && LASTNAME.invalid}"/>
+            <div *ngIf="f.submitted && LASTNAME.invalid" class="invalid-feedback">
+                <div *ngIf="LASTNAME.errors?.required">* Last Name is required *</div>
+               <div *ngIf="LASTNAME.errors?.minlength">* First Name must be more than 3 letters *</div>
+              </div>
             
             </td>
+            
         </tr>
         <br>
 
         <tr>
+            <td >
+                AGE * :
+               
+            </td>
+            
+            <td>
+            <input type="number" [(ngModel)]="model.AGE" #AGE="ngModel" name="AGE" class="form-control"  required min="15" [ngClass]="{'is-invalid' :f.submitted && AGE.invalid}"/>
+            <div *ngIf="f.submitted && AGE.invalid" class="invalid-feedback">
+                <div *ngIf="AGE.errors?.required">* Age Name is required *</div>
+                <div *ngIf="AGE.errors?.min">* Age Name must be more than 15 *</div>
+              
+              </div>
+            
+            </td>
+            
+        </tr>
+               <tr>
             <td>
                 DATE OF BIRTH * :
             </td>
             <td>
-            <input type="date" >
+            <input type="date"  class="form-control"  [(ngModel)]="model.DATEOFBIRTH" #DATEOFBIRTH="ngModel" name="DATEOFBIRTH" required [ngClass]="{'is-invalid' :f.submitted && DATEOFBIRTH.invalid}"/>
+            <div *ngIf="f.submitted && DATEOFBIRTH.invalid" class="invalid-feedback">
+                <div *ngIf="DATEOFBIRTH.errors?.required">* Date of Birth is required *</div>
+              </div>       
         </td>
         </tr>
         <br>
 
+        <br>
+         
+             <tr>
+            <td>
+                GENDER * :
+            </td>
+            <td     class="form-check"  >
+            <input type="radio" [(ngModel)]="model.GENDER" value="male" id="male" name="GENDER" #GENDER="ngModel" [ngClass]="{'is-invalid' :f.submitted && GENDER.invalid}" required>   MALE
+            <br>
+            <input type="radio" [(ngModel)]="model.GENDER" value="female" id="female" name="GENDER" #GENDER="ngModel" [ngClass]="{'is-invalid' :f.submitted && GENDER.invalid}" required>   FEMALE
+            <br>
+            <input type="radio" [(ngModel)]="model.GENDER"  value="others" id="others" name="GENDER" #GENDER="ngModel" [ngClass]="{'is-invalid' :f.submitted && GENDER.invalid}" required>   OTHERS
+            <div *ngIf="f.submitted && GENDER.invalid" class="invalid-feedback">
+                <div *ngIf="GENDER.errors?.required">* Gender is required *</div>
+              </div>
+            </td>
+        </tr>
+        <br>
+
+     
         <tr>
             <td>
                 E-MAIL * :
             </td>
             <td>
-            <input type="email" >
+            <input type="email" class="form-control"  name="EMAIL" #EMAIL="ngModel" [(ngModel)]="model.EMAIL" [ngClass]="{'is-invalid' :f.submitted && EMAIL.invalid}" required/>
+            <div *ngIf="f.submitted && EMAIL.invalid" class="invalid-feedback">
+                <div *ngIf="EMAIL.errors?.email">* Email is not in a proper format*</div>
+                <div *ngIf="EMAIL.errors?.required">* Email is required *</div>
+              </div>       
             </td>
         </tr>
         <br>
-        <tr>
+    
+           <tr>
             <td>
                 CURRENT ADDRESS * :
             </td>
             <td>
-            <input type="text"   />
+            <input type="text" class="form-control" name="CURRENTADDRESS" #CURRENTADDRESS="ngModel" required [(ngModel)]="model.CURRENTADDRESS" [ngClass]="{'is-invalid' :f.submitted && CURRENTADDRESS.invalid}" />
+            <div *ngIf="f.submitted && CURRENTADDRESS.invalid" class="invalid-feedback">
+                <div *ngIf="CURRENTADDRESS.errors?.required">* CURRENTADDRESS is required *</div>
+              </div>        
             </td>
         </tr>
         <br>
-        <tr>
+      <tr>
             <td>
                 Is your current address and permanent address same ? :
             </td>
             <td>
-            <input type="checkbox"  >CLICK HERE
+            <input type="checkbox"class="custom-select" (change)="Address()">CLICK HERE
             </td>
         </tr>
         <br>
@@ -92,101 +130,124 @@
                 PERMANENT ADDRESS * :
             </td>
             <td>
-            <input type="text"  />
+            <input type="text" class="form-control" name="PERMANENTADDRESS" #PERMANENTADDRESS="ngModel" [(ngModel)]="model.PERMANENTADDRESS" />
             </td>
         </tr>
         <br>
         
-
+ 
         <tr>
             <td>
                 HSLC SCHOOL NAME * :
             </td>
             <td>
-            <input type="text"  />
+            <input type="text" class="form-control" name="HSLCSCHOOLNAME" #HSLCSCHOOLNAME="ngModel" required [(ngModel)]="model.HSLCSCHOOLNAME" [ngClass]="{'is-invalid' :f.submitted && HSLCSCHOOLNAME.invalid}"/>
+            <div *ngIf="f.submitted && HSLCSCHOOLNAME.invalid" class="invalid-feedback">
+                <div *ngIf="HSLCSCHOOLNAME.errors?.required">* HSLC school name is required *</div>
+              </div>  
             </td>
         </tr>
         <br>
 
-        <tr>
+         <tr>
             <td>
-                HSLC MODE * :
+                HSLC MODE *  :
             </td>
-            <td>
-            <select>
-                <option>----------------</option>
-                <option>CBSE</option>
-                <option>STATE BOARD</option>
-                <option>MATRIC</option>
-            </select>
+            <td     class="form-check"  >
+            <input type="radio" [(ngModel)]="model.HSLCMODE" value="cbse" id="cbse" name="HSLCMODE" #HSLCMODE="ngModel" [ngClass]="{'is-invalid' :f.submitted && HSLCMODE.invalid}"  required>   CBSE
+            <br>
+            <input type="radio" [(ngModel)]="model.HSLCMODE" value="stateboard" id="stateboard" name="HSLCMODE" #HSLCMODE="ngModel"  [ngClass]="{'is-invalid' :f.submitted && HSLCMODE.invalid}" required>   STATE BOARD
+            <br>
+            <input type="radio" [(ngModel)]="model.HSLCMODE" value="matric" id="matric" name="HSLCMODE" #HSLCMODE="ngModel"  [ngClass]="{'is-invalid' :f.submitted && HSLCMODE.invalid}" required>   MATRIC
+            <div *ngIf="f.submitted && HSLCMODE.invalid" class="invalid-feedback">
+                <div *ngIf="HSLCMODE.errors?.required">* HSLC mode is required *</div>
+              </div>
             </td>
         </tr>
+    
         <br>
 
-        <tr>
+         <tr>
             <td>
                 HSLC MARK * :
             </td>
             <td>
-            <input type="number"  />
+            <input  type="number" class="form-control" [(ngModel)]="model.HSLCMARK" [ngClass]="{'is-invalid' :f.submitted && HSLCMARK.invalid}"  name="HSLCMARK" #HSLCMARK="ngModel" required (change)="hresult()" >
+            <div *ngIf="f.submitted && HSLCMARK.invalid" class="invalid-feedback">
+                <div *ngIf="HSLCMARK.errors?.required">HSLC Mark is required</div>
+              
+              </div>   
             </td>
         </tr>
         <br>
 
-        <tr>
+       <tr>
             <td>
                 HSLC PERCENT * :
             </td>
             <td>
-            <input type="number"  />
+            <input type="number" class="form-control" [(ngModel)]="model.HSLCPERCENT" name="HSLCPERCENT" #HSLCPERCENT="ngModel" readonly/>
             </td>
         </tr>
         <br>
 
-        <tr>
-            <td>
-                SSLC SCHOOL NAME * :
-            </td>
-            <td>
-            <input type="text"  />
-            </td>
-        </tr>
-        <br>
+       
+      <tr>
+    <td>
+        SSLC SCHOOL NAME * :
+    </td>
+    <td>
+    <input type="text" class="form-control" name="SSLCSCHOOLNAME" #SSLCSCHOOLNAME="ngModel" required [(ngModel)]="model.SSLCSCHOOLNAME" [ngClass]="{'is-invalid' :f.submitted && SSLCSCHOOLNAME.invalid}"/>
+    <div *ngIf="f.submitted && SSLCSCHOOLNAME.invalid" class="invalid-feedback">
+        <div *ngIf="SSLCSCHOOLNAME.errors?.required">* SSLC school name is required *</div>
+      </div>  
+    </td>
+</tr>
+<br>
 
-        <tr>
-            <td>
-                SSLC MODE * :
-            </td>
-            <td>
-                <select >
-                    <option>----------------</option>
-                    <option>CBSE</option>
-                    <option>STATE BOARD</option>
-                    <option>MATRIC</option>
-                </select>
-            </td>
-        </tr>
-        <br>
+ <tr>
+    <td>
+        SSLC MODE *  :
+    </td>
+    <td     class="form-check"  >
+    <input type="radio" [(ngModel)]="model.SSLCMODE" value="cbse" id="cbse" name="SSLCMODE" #SSLCMODE="ngModel" [ngClass]="{'is-invalid' :f.submitted && SSLCMODE.invalid}"  required>   CBSE
+    <br>
+    <input type="radio" [(ngModel)]="model.SSLCMODE" value="stateboard" id="stateboard" name="SSLCMODE" #SSLCMODE="ngModel"  [ngClass]="{'is-invalid' :f.submitted && SSLCMODE.invalid}" required>   STATE BOARD
+    <br>
+    <input type="radio" [(ngModel)]="model.SSLCMODE" value="matric" id="matric" name="SSLCMODE" #SSLCMODE="ngModel"  [ngClass]="{'is-invalid' :f.submitted && SSLCMODE.invalid}" required>   MATRIC
+    <div *ngIf="f.submitted && SSLCMODE.invalid" class="invalid-feedback">
+        <div *ngIf="SSLCMODE.errors?.required">* SSLC mode is required *</div>
+      </div>
+    </td>
+</tr>
 
-        <tr>
-            <td>
-                SSLC MARK * :
-            </td>
-            <td>
-            <input type="number"  />
-            </td>
-        </tr>
-        <br>
+<br>
 
-        <tr>
-            <td>
-                SSLC PERCENT * :
-            </td>
-            <td>
-            <input type="number"  />
-            </td>
-        </tr>
-        <br>
+ <tr>
+    <td>
+        SSLC MARK * :
+    </td>
+    <td>
+    <input  type="number" class="form-control" [(ngModel)]="model.SSLCMARK" [ngClass]="{'is-invalid' :f.submitted && SSLCMARK.invalid}"  name="SSLCMARK" #SSLCMARK="ngModel" required (change)="sresult()" >
+    <div *ngIf="f.submitted && SSLCMARK.invalid" class="invalid-feedback">
+        <div *ngIf="SSLCMARK.errors?.required">SSLC Mark is required</div>
+      
+      </div>   
+    </td>
+</tr>
+<br>
+
+<tr>
+    <td>
+        SSLC PERCENT * :
+    </td>
+    <td>
+    <input type="number" class="form-control" [(ngModel)]="model.SSLCPERCENT" name="SSLCPERCENT" #SSLCPERCENT="ngModel" readonly/>
+    </td>
+</tr>
+<br>
+
+
 
         <tr>
             <td>

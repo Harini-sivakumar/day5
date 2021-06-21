@@ -36,18 +36,7 @@
         </tr>
         <br>
 
-        <tr>
-            <td>
-                AGE * :
-            </td>
-            <td>
-            <input type="number" class="form-control" formControlName="AGE" [ngClass]="{'is-invalid' :submitted && f.AGE.errors}"/>
-            <div *ngIf="submitted && f.AGE.errors" class="invalid-feedback">
-                <div *ngIf="f.AGE.errors.required">* Age is required *</div>
-              </div>   
-            </td>
-        </tr>
-        <br>
+       
 
         <tr>
             <td>
@@ -71,11 +60,24 @@
                 DATE OF BIRTH * :
             </td>
             <td>
-            <input type="date"  class="form-control"  formControlName="DATEOFBIRTH" [ngClass]="{'is-invalid' :submitted && f.DATEOFBIRTH.errors}"/>
+            <input type="date"  class="form-control"  formControlName="DATEOFBIRTH" [ngClass]="{'is-invalid' :submitted && f.DATEOFBIRTH.errors}" [(ngModel)]="birth" (change)="ageCalc()" />
             <div *ngIf="submitted && f.DATEOFBIRTH.errors" class="invalid-feedback">
                 <div *ngIf="f.DATEOFBIRTH.errors.required">* Date of Birth is required *</div>
               </div>       
         </td>
+        </tr>
+        <br>
+        <tr>
+            <td>
+                AGE * :
+            </td>
+            <td>
+            <input type="number" class="form-control" formControlName="AGE" [ngClass]="{'is-invalid' :submitted && f.AGE.errors}" required min="15" />
+            <div *ngIf="submitted && f.AGE.errors" class="invalid-feedback">
+                <div *ngIf="f.AGE.errors.required">* Age is required *</div>
+                <div *ngIf="f.AGE.errors?.min">* Age is must be above 15</div>
+              </div>     
+            </td>
         </tr>
         <br>
 
@@ -173,7 +175,7 @@
                 HSLC PERCENT * :
             </td>
             <td>
-            <input type="number" class="form-control" formControlName="HSLCPERCENT" value="{{hpercent}}"/>
+            <input type="number" class="form-control" formControlName="HSLCPERCENT" value="{{hpercent}}" readonly/>
             </td>
         </tr>
         <br>
@@ -215,7 +217,7 @@
                 SSLC MARK * :
             </td>
             <td>
-            <input  type="number" class="form-control" formControlName="SSLCMARK" [ngClass]="{'is-invalid' :submitted && f.SSLCMARK.errors}"/>
+            <input  type="number" class="form-control" formControlName="SSLCMARK" [ngClass]="{'is-invalid' :submitted && f.SSLCMARK.errors}"  [(ngModel)]="smarks" (change)="sresult()"/>
             <div *ngIf="submitted && f.SSLCMARK.errors" class="invalid-feedback">
                 <div *ngIf="f.SSLCMARK.errors.required">* SSLC Mark is required *</div>
               </div>   
@@ -228,7 +230,7 @@
                 SSLC PERCENT * :
             </td>
             <td>
-            <input type="number" class="form-control" />
+            <input type="number" class="form-control" value="{{spercent}}" readonly/>
             </td>
         </tr>
         <br>
