@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularService } from '../angular.service';
 
 @Component({
   selector: 'app-template',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class TemplateComponent implements OnInit {
 submitted=false;
 model:any={}
-  constructor() { }
+  constructor(private task:AngularService) { }
 
   ngOnInit(): void {
   }
@@ -16,14 +17,12 @@ model:any={}
 Address(){
   if(this.model.CURRENTADDRESS){
     this.model.PERMANENTADDRESS=this.model.CURRENTADDRESS;
-    console.log(this.model.PERMANENTADDRESS);
   }
 }
 
   hresult(){
     if(this.model.HSLCMARK<=1200){
       this.model.HSLCPERCENT=(((this.model.HSLCMARK)/1200)*100);
-      console.log(this.model.HSLCPERCENT);
     }else{
       this.model.HSLCPERCENTt=0;
     }
@@ -33,7 +32,7 @@ Address(){
   sresult(){
     if(this.model.SSLCMARK<=1200){
       this.model.SSLCPERCENT=(((this.model.SSLCMARK)/500)*100);
-      console.log(this.model.SSLCPERCENT);
+    
     }else{
       this.model.HSLCPERCENTt=0;
     }
@@ -48,7 +47,8 @@ Address(){
       return;
   
     }
-    console.log(this.model);
+    
+    this.task.setData(this.model);
 
 }
 }
