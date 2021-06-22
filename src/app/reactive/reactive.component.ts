@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FromEventTarget } from 'rxjs/internal/observable/fromEvent';
+import { AngularService } from '../angular.service';
 
 @Component({
   selector: 'app-reactive',
@@ -24,14 +25,14 @@ birth!:number;
 showAge!:number;
 
 
-constructor(private formbuilder:FormBuilder) { }
+constructor(private formbuilder:FormBuilder,private task:AngularService) { }
 get f() { return this.student.controls; }
   ngOnInit(): void {
     this.student= this.formbuilder.group({
       FIRSTNAME:['',Validators.required],
       
       LASTNAME:[null,Validators.required],
-      AGE:[null,Validators.required],
+      AGE:[this.ageCalc,Validators.required],
       GENDER:[null,Validators.required],
       DATEOFBIRTH:[null,Validators.required],
       EMAIL:[' ',Validators.email],
@@ -40,10 +41,11 @@ get f() { return this.student.controls; }
       HSLCSCHOOLNAME:[null,Validators.required],
       HSLCMODE:[null,Validators.required],
       HSLCMARK:['',Validators.required],
-      HSLCPERCENT:[null],
+      HSLCPERCENT:[this.hpercent, [Validators.min(35), Validators.max(100)]],
       SSLCSCHOOLNAME:[null,Validators.required],
       SSLCMODE:[null,Validators.required],
-      SSLCMARK:[null,Validators.required]
+      SSLCMARK:[null,Validators.required],
+      SSLCPERCENT:[this.spercent, [Validators.min(35), Validators.max(100)]],
     })
   
   
@@ -52,7 +54,7 @@ get f() { return this.student.controls; }
 Address(){
   if(this.caddress){
     this.student.controls.PERMANENTADDRESS.setValue(this.caddress);
-    console.log(this.student.controls.PERMANENTADDRESS.value);
+   
   }
   
 
@@ -62,13 +64,13 @@ ageCalc(){
     const convertbirth = new Date(this.birth);
     const timeDiff = Math.abs(Date.now() - convertbirth.getTime());
     this.showAge = Math.floor((timeDiff / (1000 * 3600 * 24))/365.25);
-    this.student.controls.age.setValue(this.showAge)
+    this.student.controls.age.setValue(this.showAge);
   }
 }
 hresult(){
   if(this.hmarks<=1200){
     this.hpercent=(((this.hmarks)/1200)*100);
-    console.log(this.hpercent);
+  
   }else{
     this.hpercent=0;
   }
@@ -76,7 +78,7 @@ hresult(){
 sresult(){
   if(this.smarks<=1200){
     this.spercent=(((this.smarks)/500)*100);
-    console.log(this.spercent);
+   
   }else{
     this.spercent=0;
   }
@@ -88,9 +90,10 @@ onSubmit(){
     return;
 
   }
+  this.task.setData(this.student.value);
  
 
-  console.log(this.student.value);
+  
 
    
  
